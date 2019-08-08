@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56 (81588) - https://sketch.com -->
+    <title>dislike copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="100%" y1="0.00143486988%" x2="0%" y2="99.9985651%" id="linearGradient-1">
+            <stop stop-color="#FD2C7A" offset="0%"></stop>
+            <stop stop-color="#FF7255" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Web" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Cards" transform="translate(-633.000000, -600.000000)" fill="url(#linearGradient-1)">
+            <g id="Group-3-Copy" transform="translate(570.000000, 162.000000)">
+                <g id="Buttons" transform="translate(0.000000, 423.000000)">
+                    <g id="Nope">
+                        <path d="M72.8088182,20.8944639 L67.7265058,15.8121515 C66.6462874,14.7319331 64.8896985,14.7277973 63.8088182,15.8086775 C62.7301374,16.8873583 62.7294934,18.6435662 63.8122923,19.7263651 L68.8946047,24.8086775 L63.8122923,29.8909899 C62.7294934,30.9737888 62.7301374,32.7299966 63.8088182,33.8086775 C64.8896985,34.8895577 66.6462874,34.8854219 67.7265058,33.8052035 L72.8088182,28.7228911 L77.8911307,33.8052035 C78.9713491,34.8854219 80.727938,34.8895577 81.8088182,33.8086775 C82.8874991,32.7299966 82.8881431,30.9737888 81.8053442,29.8909899 L76.7230318,24.8086775 L81.8053442,19.7263651 C82.8881431,18.6435662 82.8874991,16.8873583 81.8088182,15.8086775 C80.727938,14.7277973 78.9713491,14.7319331 77.8911307,15.8121515 L72.8088182,20.8944639 Z" id="dislike-copy"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

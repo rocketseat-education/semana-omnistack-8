@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="20px" viewBox="0 0 24 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56 (81588) - https://sketch.com -->
+    <title>like copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="101.983442%" y1="16.6157995%" x2="0%" y2="87.3869929%" id="linearGradient-1">
+            <stop stop-color="#14E29A" offset="0%"></stop>
+            <stop stop-color="#58EED7" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Web" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Cards" transform="translate(-786.000000, -600.000000)" fill="url(#linearGradient-1)">
+            <g id="Group-3-Copy" transform="translate(570.000000, 162.000000)">
+                <g id="Buttons" transform="translate(0.000000, 423.000000)">
+                    <g id="Nope">
+                        <path d="M236.985745,26.9872824 C236.995183,26.995676 237,27 237,27 L228,35 L219,27 C219,27 219.004864,26.9957062 219.014393,26.9873702 C217.202206,25.8338547 216,23.8073225 216,21.5 C216,17.9101491 218.910149,15 222.5,15 C224.815767,15 226.848684,16.2110222 228,18.0343141 C229.151316,16.2110222 231.184233,15 233.5,15 C237.089851,15 240,17.9101491 240,21.5 C240,23.807264 238.797855,25.8337519 236.985745,26.9872824 Z" id="like-copy"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
