@@ -21,9 +21,7 @@
   box-sizing: border-box;
 }
 
-html,
-body,
-#root {
+html,body,#root,.app {
   height: 100%;
 }
 
