@@ -25,7 +25,7 @@
 
 .main-container ul li footer {
   flex: 1;
-  background: #fff;
+  background: #FFF;
   border: 1px solid #eee;
   padding: 15px 20px;
   text-align: left;
@@ -56,7 +56,7 @@
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05);
   border: 0;
   border-radius: 4px;
-  background: #fff;
+  background: #FFF;
   cursor: pointer;
 }
 
@@ -89,13 +89,13 @@
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  border: 5px solid #fff;
+  border: 5px solid #FFF;
   margin: 30px 0;
 }
 
 .match-container strong {
   font-size: 32px;
-  color: #fff;
+  color: #FFF;
 }
 
 .match-container p {
@@ -115,3 +115,4 @@
   margin-top: 30px;
   cursor: pointer;
 }
+
