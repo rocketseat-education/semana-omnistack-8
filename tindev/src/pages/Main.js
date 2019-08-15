@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import AsyncStorage from '@react-native-community/async-storage';
-import { View, Text, SafeAreaView, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, SafeAreaView, Image, StyleSheet, TouchableOpacity, Animated, Dimensions } from 'react-native';
+import { PanGestureHandler, State } from 'react-native-gesture-handler';
 
 import api from '../services/api';
 
@@ -10,10 +11,14 @@ import like from '../assets/like.png';
 import dislike from '../assets/dislike.png';
 import itsamatch from '../assets/itsamatch.png';
 
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const rotationX = SCREEN_WIDTH * 2;
+
 export default function Main({ navigation }) {
   const id = navigation.getParam('user');
   const [users, setUsers] = useState([]);
   const [matchDev, setMatchDev] = useState(null);
+  const pan = new Animated.ValueXY(0);
 
   useEffect(() => {
     async function loadUsers() {
@@ -39,8 +44,46 @@ export default function Main({ navigation }) {
     })
   }, [id]);
 
+  function swipeEffect(direction, func) {
+    let x = 0;
+    let y = 0;
+
+    if(direction === 'right') {
+      x = 1000;
+    } else if (direction === 'left') {
+      x = -1000;
+    } else if (direction === 'top') {
+      y = -1000;
+    }
+
+    Animated.timing(pan, {
+      toValue: { x, y },
+      duration: 180,
+      useNativeDriver: true,
+    }).start();
+
+    if(func) {
+      func();
+    }
+
+  }
+
+  async function handleSuperLike() {
+    const [user, ...rest] = users;
+
+    swipeEffect('top');
+
+    await api.post(`/devs/${user._id}/likes`, null, {
+      headers: { user: id },
+    })
+
+    setUsers(rest);
+  }
+
   async function handleLike() {
     const [user, ...rest] = users;
+
+    swipeEffect('right');
 
     await api.post(`/devs/${user._id}/likes`, null, {
       headers: { user: id },
@@ -51,6 +94,8 @@ export default function Main({ navigation }) {
 
   async function handleDislike() {
     const [user, ...rest] = users;
+
+    swipeEffect('left');
 
     await api.post(`/devs/${user._id}/dislikes`, null, {
       headers: { user: id },
@@ -65,6 +110,50 @@ export default function Main({ navigation }) {
     navigation.navigate('Login');
   }
 
+  function resetPosition() {
+    Animated.timing(pan, {
+      toValue: 0,
+      duration: 150,
+      useNativeDriver: true,
+    }).start();
+  }
+
+  const onGestureEvent = Animated.event(
+    [
+      {
+        nativeEvent: {
+          translationX: pan.x,
+          translationY: pan.y,
+        },
+      },
+    ],
+    { useNativeDriver: true }
+  );
+
+  const onHandlerStateChange = event => {
+    if (event.nativeEvent.oldState === State.ACTIVE) {
+
+      if(event.nativeEvent.translationX > 80) {
+        return swipeEffect('right', handleLike);
+      }
+
+      if(event.nativeEvent.translationX < -80) {
+        return swipeEffect('left', handleDislike);
+      }
+
+      if(event.nativeEvent.translationY < -80) {
+        return swipeEffect('top', handleSuperLike);
+      }
+
+      resetPosition();
+    }
+  };
+
+  const rotate = pan.x.interpolate({
+    inputRange: [-rotationX, 0, rotationX],
+    outputRange: ['-120deg', '0deg', '120deg'],
+  });
+
   return (
     <SafeAreaView style={styles.container}>
       <TouchableOpacity onPress={handleLogout}>
@@ -76,13 +165,19 @@ export default function Main({ navigation }) {
           ? <Text style={styles.empty}>Acabou :(</Text>
           : (
             users.map((user, index) => (
-              <View key={user._id} style={[styles.card, { zIndex: users.length - index }]}>
-                <Image style={styles.avatar} source={{ uri: user.avatar }} />
-                <View style={styles.footer}>
-                  <Text style={styles.name}>{user.name}</Text>
-                  <Text style={styles.bio} numberOfLines={3}>{user.bio}</Text>
-                </View>
-              </View>
+              <PanGestureHandler
+                key={user._id}
+                onGestureEvent={onGestureEvent}
+                onHandlerStateChange={onHandlerStateChange}
+              >
+                <Animated.View style={[styles.card, { zIndex: users.length - index, transform: [{ translateX: pan.x }, { translateY: pan.y }, { rotate }] }]}>
+                  <Image style={styles.avatar} source={{ uri: user.avatar }} />
+                  <View style={styles.footer}>
+                    <Text style={styles.name}>{user.name}</Text>
+                    <Text style={styles.bio} numberOfLines={3}>{user.bio}</Text>
+                  </View>
+                </Animated.View>
+              </PanGestureHandler>
             ))
           )}
       </View>
@@ -181,6 +276,7 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     flexDirection: 'row',
     marginBottom: 30,
+    zIndex: 1,
   },
 
   button: {
