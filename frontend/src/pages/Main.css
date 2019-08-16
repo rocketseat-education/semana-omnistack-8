@@ -79,7 +79,7 @@
 }
 
 .match-container {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -121,3 +121,4 @@
   margin-top: 30px;
   cursor: pointer;
 }
+
